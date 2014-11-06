@@ -46,4 +46,23 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
+
+    
+};
+
+var myFirebaseRef = new Firebase("https://shining-fire-2159.firebaseio.com/");
+var userName;
+function doLogin(){
+    alert("loggg");
+    userName = document.getElementById("userName").value;
+    window.location.assign("./chat.html");
+    return false;
+};
+function sendMessage(){
+    myFirebaseRef.set({"name": "David"});
+}; 
+function reciveMessage(){
+    myFirebaseRef.child("name").on("value", function(snapshot) {
+        alert(snapshot.val()); 
+    });
 };

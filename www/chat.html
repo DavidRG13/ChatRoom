@@ -25,16 +25,5 @@
         <script type="text/javascript">
             app.initialize();
         </script>
-        <script type="text/javascript">
-            var myFirebaseRef = new Firebase("https://shining-fire-2159.firebaseio.com/");
-            sendMessage = function(){
-                myFirebaseRef.set({"name": "David"});
-            }; 
-            reciveMessage = function(){
-                myFirebaseRef.child("name").on("value", function(snapshot) {
-                    alert(snapshot.val()); 
-                });
-            };
-        </script>
     </body>
 </html>

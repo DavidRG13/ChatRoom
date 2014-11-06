@@ -11,30 +11,23 @@
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div>
-                <div id="messages"></div>
-                <button onclick="sendMessage()" value="Send">Send</button>
-                <button onclick="reciveMessage()" value="Read">Read</button>
-            </div>
+        <div id="login">
+            <div id="triangle"></div>
+            <h1>Log in</h1>
+            <form onsubmit="return doLogin()">
+                <input type="text" id="userName" placeholder="Nombre de usuario" />
+                <input type="password" placeholder="Password" />
+                <input type="submit" value="Log in"/>
+            </form>
+            <a href="../chat.html">1</a>
+            <a href="./chat.html">2</a>
+            <a href="/chat.html">3</a>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script src="https://cdn.firebase.com/js/client/1.1.2/firebase.js"></script>
         <script type="text/javascript">
             app.initialize();
-        </script>
-        <script type="text/javascript">
-            var myFirebaseRef = new Firebase("https://shining-fire-2159.firebaseio.com/");
-            sendMessage = function(){
-                myFirebaseRef.set({"name": "David"});
-            }; 
-            reciveMessage = function(){
-                myFirebaseRef.child("name").on("value", function(snapshot) {
-                    alert(snapshot.val()); 
-                });
-            };
         </script>
     </body>
 </html>
