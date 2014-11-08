@@ -18,25 +18,25 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function () {
         this.bindEvents();
     },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
+    bindEvents: function () {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
+    onDeviceReady: function () {
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function (id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -46,23 +46,24 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
-
-    
 };
 
 var myFirebaseRef = new Firebase("https://shining-fire-2159.firebaseio.com/");
 var userName;
-function doLogin(){
+
+function doLogin() {
     alert("loggg");
     userName = document.getElementById("userName").value;
     window.location.assign("./chat.html");
     return false;
 };
-function sendMessage(){
+
+function sendMessage() {
     myFirebaseRef.set({"name": "David"});
-}; 
-function reciveMessage(){
-    myFirebaseRef.child("name").on("value", function(snapshot) {
-        alert(snapshot.val()); 
+};
+
+function reciveMessage() {
+    myFirebaseRef.child("name").on("value", function (snapshot) {
+        alert(snapshot.val());
     });
 };
