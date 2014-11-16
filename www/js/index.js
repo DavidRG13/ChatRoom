@@ -1,21 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 var app = {
     // Application Constructor
     initialize: function () {
@@ -48,22 +30,37 @@ var app = {
     }
 };
 
-var myFirebaseRef = new Firebase("https://shining-fire-2159.firebaseio.com/");
-var userName;
-
 function doLogin() {
-    alert("loggg");
-    userName = document.getElementById("userName").value;
-    window.location.assign("./chat.html");
+    var userName = document.getElementById("userName").value;
+    window.location.assign("./chat.html?q=" + userName);
     return false;
-};
+}
 
 function sendMessage() {
-    myFirebaseRef.set({"name": "David"});
-};
+    var messageContent = document.getElementById("messageIn").value;
+    refMessages.push({"message": {"userName": getUser(), "messageContent": messageContent}});
+    document.getElementById("messageIn").value = "";
+    return false;
+}
 
-function reciveMessage() {
-    myFirebaseRef.child("name").on("value", function (snapshot) {
-        alert(snapshot.val());
+function registerListener() {
+    refMessages.on("child_added", function (messageAdded) {
+        var newMessage = messageAdded.val();
+        var element = document.createElement("div");
+        var messageUser = newMessage.message.userName;
+        if (messageUser == getUser()) {
+            console.log("==");
+            element.className = "bubble bubble-alt white";
+            element.innerHTML = "<p>" + newMessage.message.messageContent + "</p>";
+        } else {
+            console.log("NO ==");
+            element.className = "bubble";
+            element.innerHTML = "<p>" + newMessage.message.userName + ": " + newMessage.message.messageContent + "</p>";
+        }
+        document.getElementById("container").appendChild(element);
     });
-};
+}
+
+function getUser() {
+    return location.search.substr(location.search.indexOf("=") + 1);
+}

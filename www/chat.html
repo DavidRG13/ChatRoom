@@ -14,7 +14,7 @@
 <body>
 <div id="login">
     <form onsubmit="return sendMessage()">
-        <div class="container">
+        <div class="container" id="container">
 
             <div class="bubble">
                 <p>Hey how's it going?</p>
@@ -45,12 +45,15 @@
         <input type="submit" value="Mandar"/>
     </form>
 </div>
-<!--<button onclick="reciveMessage()" value="Read">Read</button>-->
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script src="https://cdn.firebase.com/js/client/1.1.2/firebase.js"></script>
 <script type="text/javascript">
     app.initialize();
+    var myFirebaseRef = new Firebase("https://shining-fire-2159.firebaseio.com/");
+    var refMessages = myFirebaseRef.child("messages");
+
+    registerListener();
 </script>
 </body>
 </html>
